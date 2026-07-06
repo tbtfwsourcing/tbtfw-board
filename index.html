@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>TBTFW // Sourcing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#000; --ink:#fff; --mut:#8b8b8b; --dim:#4a4a4a; --line:#1d1d1d;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg)}
+body{
+background:var(--bg); color:var(--ink);
+font-family:'Archivo',system-ui,sans-serif;
+-webkit-font-smoothing:antialiased; min-height:100vh;
+}
+a{color:inherit; text-decoration:none}
+.eyebrow{
+font-size:10px; letter-spacing:.28em; text-transform:uppercase;
+color:var(--mut); font-weight:500;
+}
+.mono{font-family:'IBM Plex Mono',monospace}
+
+header{
+display:flex; align-items:baseline; justify-content:space-between;
+padding:22px 24px 0; gap:16px; flex-wrap:wrap;
+}
+.wordmark{font-weight:600; letter-spacing:.34em; font-size:14px; text-transform:uppercase}
+.wordmark span{color:var(--mut); font-weight:300}
+.stamp{font-size:10px; letter-spacing:.22em; color:var(--mut); text-transform:uppercase}
+
+.thesis{padding:44px 24px 30px; border-bottom:1px solid var(--line)}
+.thesis .count{
+font-weight:300; font-size:clamp(64px,12vw,120px); line-height:.95; letter-spacing:-.02em;
+}
+.thesis .sub{margin-top:10px}
+
+.tally{
+display:flex; gap:22px; flex-wrap:wrap; padding:16px 24px;
+border-bottom:1px solid var(--line);
+}
+.tally button{
+background:none; border:none; color:var(--mut); cursor:pointer;
+font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.16em;
+padding:4px 0; border-bottom:1px solid transparent; text-transform:uppercase;
+}
+.tally button b{color:var(--ink); font-weight:500}
+.tally button.on{color:var(--ink); border-bottom-color:var(--ink)}
+.tally button:focus-visible{outline:1px solid var(--ink); outline-offset:3px}
+
+.controls{
+display:flex; gap:18px; align-items:center; padding:18px 24px;
+border-bottom:1px solid var(--line); flex-wrap:wrap;
+}
+.search{
+flex:1 1 260px; background:none; border:none; border-bottom:1px solid var(--dim);
+color:var(--ink); font-family:'Archivo',sans-serif; font-size:16px; font-weight:300;
+padding:6px 0; letter-spacing:.02em;
+}
+.search::placeholder{color:var(--dim); text-transform:uppercase; font-size:11px; letter-spacing:.22em}
+.search:focus{outline:none; border-bottom-color:var(--ink)}
+select{
+background:#000; color:var(--mut); border:1px solid var(--line);
+font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em;
+padding:7px 10px; text-transform:uppercase;
+}
+select:focus-visible{outline:1px solid var(--ink)}
+.makes{display:flex; gap:14px; flex-wrap:wrap}
+.makes button{
+background:none; border:none; color:var(--mut); cursor:pointer;
+font-size:10px; letter-spacing:.24em; text-transform:uppercase; font-weight:500;
+padding:4px 0; border-bottom:1px solid transparent;
+}
+.makes button.on{color:var(--ink); border-bottom-color:var(--ink)}
+.makes button:focus-visible{outline:1px solid var(--ink); outline-offset:3px}
+
+.grid{
+display:grid; grid-template-columns:repeat(auto-fill,minmax(330px,1fr));
+}
+.card{
+border-bottom:1px solid var(--line); border-right:1px solid var(--line);
+padding:22px 24px 20px; display:flex; flex-direction:column; gap:14px;
+transition:background .15s ease;
+}
+.card:hover{background:#0a0a0a}
+.card .top{display:flex; justify-content:space-between; align-items:center; gap:10px}
+.chip{
+font-size:9px; letter-spacing:.26em; text-transform:uppercase; font-weight:600;
+padding:4px 9px; border:1px solid var(--dim); color:var(--mut);
+}
+.chip.CHASE{background:var(--ink); color:#000; border-color:var(--ink)}
+.chip.WATCH{border-color:var(--ink); color:var(--ink)}
+.chip.FLAG{border-color:var(--dim); color:var(--mut)}
+.chip.NEW{border-style:dashed}
+.age{font-size:10px; color:var(--dim); letter-spacing:.14em}
+
+.name{font-weight:500; font-size:21px; line-height:1.15; letter-spacing:.01em}
+.name .yr{color:var(--mut); font-weight:300}
+.trimline{color:var(--mut); font-weight:300; font-size:14px; margin-top:3px; letter-spacing:.04em}
+
+.price{font-size:22px; font-weight:500; letter-spacing:.01em}
+.miles{color:var(--dim); font-size:11px; letter-spacing:.12em; margin-left:10px}
+
+.delta{font-size:12px; letter-spacing:.14em; text-transform:uppercase; font-weight:600}
+.delta.under{color:var(--ink)}
+.delta.over{color:var(--dim); font-weight:400}
+.compmeta{color:var(--dim); font-size:10px; letter-spacing:.12em; margin-top:4px; text-transform:uppercase}
+
+.rule{position:relative; height:22px; margin-top:6px}
+.rule .track{position:absolute; left:0; right:0; top:10px; height:1px; background:var(--dim)}
+.rule .med{position:absolute; top:6px; width:1px; height:9px; background:var(--mut)}
+.rule .mark{position:absolute; top:3px; width:7px; height:15px; background:var(--ink)}
+.rule .lo,.rule .hi{position:absolute; top:14px; font-size:9px; color:var(--dim); letter-spacing:.08em}
+.rule .lo{left:0} .rule .hi{right:0}
+
+.nobase{color:var(--dim); font-size:11px; letter-spacing:.2em; text-transform:uppercase; padding:8px 0}
+
+.foot{display:flex; justify-content:flex-end; margin-top:auto}
+.foot a{
+font-size:10px; letter-spacing:.26em; text-transform:uppercase; font-weight:500;
+color:var(--mut); border-bottom:1px solid var(--line); padding-bottom:3px;
+}
+.foot a:hover{color:var(--ink); border-bottom-color:var(--ink)}
+.foot a:focus-visible{outline:1px solid var(--ink); outline-offset:3px}
+
+.empty{padding:80px 24px; color:var(--dim); font-size:11px; letter-spacing:.24em; text-transform:uppercase}
+footer{padding:26px 24px 40px; color:#2c2c2c; font-size:10px; letter-spacing:.22em; text-transform:uppercase}
+
+@media (prefers-reduced-motion: reduce){ *{transition:none !important} }
+@media (max-width:700px){
+.thesis{padding:34px 18px 24px}
+header,.tally,.controls{padding-left:18px;padding-right:18px}
+.card{padding:18px; border-right:none}
+}
+</style>
+</head>
+<body>
+<header>
+<div class="wordmark">TBTFW <span>// Sourcing</span></div>
+<div class="stamp" id="stamp">Loading</div>
+</header>
+
+<section class="thesis">
+<div class="eyebrow">Active inventory // Los Angeles</div>
+<div class="count" id="bigcount">&nbsp;</div>
+<div class="sub eyebrow" id="subline"></div>
+</section>
+
+<nav class="tally" id="tally" aria-label="Filter by verdict"></nav>
+
+<div class="controls">
+<input class="search" id="q" type="search" placeholder="Search make / model / trim / year" aria-label="Search listings">
+<div class="makes" id="makes"></div>
+<select id="sort" aria-label="Sort listings">
+<option value="new">Newest listed</option>
+<option value="delta">Most under market</option>
+<option value="price_asc">Price low to high</option>
+<option value="price_desc">Price high to low</option>
+</select>
+</div>
+
+<main class="grid" id="grid"></main>
+<div class="empty" id="empty" hidden>No cars match // adjust the filters</div>
+<footer>TBTFW sourcing intelligence // internal // not for distribution</footer>
+
+<script>
+(function(){
+var K = new URLSearchParams(location.search).get('k') || '';
+var state = { q:'', tier:'ALL', make:'ALL', sort:'new' };
+var rows = [];
+
+function money(n){
+if(n==null) return '—';
+n = Number(n);
+if(n>=1e6) return '$'+(n/1e6).toFixed(2)+'M';
+if(n>=1e3) return '$'+Math.round(n/1e3)+'K';
+return '$'+n;
+}
+function miles(n){
+if(n==null) return '';
+n = Number(n);
+return (n>=1000 ? (n/1000).toFixed(1)+'K' : n) + ' MI';
+}
+function days(iso){
+if(!iso) return '';
+var d = Math.floor((Date.now()-new Date(iso).getTime())/864e5);
+return d<=0 ? 'TODAY' : d+'D';
+}
+function tierOf(r){ return r.ai_verdict || 'NEW'; }
+function deltaOf(r){
+if(r.price==null || r.baseline_median==null || !r.baseline_n) return null;
+return Number(r.baseline_median)-Number(r.price); // positive = under market
+}
+function esc(s){
+return String(s==null?'':s).replace(/[&<>"]/g,function(c){
+return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];
+});
+}
+
+function counts(list){
+var c = {ALL:list.length, CHASE:0, WATCH:0, FLAG:0, PASS:0, NEW:0};
+list.forEach(function(r){ c[tierOf(r)] = (c[tierOf(r)]||0)+1; });
+return c;
+}
+
+function renderTally(){
+var c = counts(rows);
+var order = ['ALL','CHASE','WATCH','FLAG','PASS','NEW'];
+var el = document.getElementById('tally');
+el.innerHTML = '';
+order.forEach(function(t){
+var b = document.createElement('button');
+b.innerHTML = '<b>'+(c[t]||0)+'</b>&nbsp;'+(t==='NEW'?'UNSCORED':t);
+if(state.tier===t) b.className='on';
+b.onclick = function(){ state.tier=t; render(); };
+el.appendChild(b);
+});
+}
+
+function renderMakes(){
+var set = {}; rows.forEach(function(r){ if(r.make) set[r.make]=1; });
+var el = document.getElementById('makes');
+el.innerHTML='';
+['ALL'].concat(Object.keys(set).sort()).forEach(function(m){
+var b = document.createElement('button');
+b.textContent = m;
+if(state.make===m) b.className='on';
+b.onclick = function(){ state.make=m; render(); };
+el.appendChild(b);
+});
+}
+
+function card(r){
+var t = tierOf(r);
+var d = deltaOf(r);
+var mid = '';
+if(d!==null){
+var lo = r.adjusted_low!=null?Number(r.adjusted_low):null;
+var hi = r.adjusted_high!=null?Number(r.adjusted_high):null;
+var deltaCls = d>=0?'under':'over';
+var deltaTxt = (d>=0? money(d)+' under market' : money(-d)+' over market');
+mid = '<div>'
++ '<div class="delta '+deltaCls+'">'+deltaTxt+'</div>'
++ '<div class="compmeta mono">median '+money(r.baseline_median)+' · n='+r.baseline_n+'</div>'
++ rangeRule(lo,hi,Number(r.price),Number(r.baseline_median))
++ '</div>';
+} else {
+mid = '<div class="nobase">'+(t==='NEW'?'Awaiting verdict':'No market baseline // manual review')+'</div>';
+}
+return '<article class="card">'
++ '<div class="top"><span class="chip '+t+'">'+(t==='NEW'?'UNSCORED':t)+'</span>'
++ '<span class="age mono">SEEN '+days(r.first_seen_at)+'</span></div>'
++ '<div><div class="name"><span class="yr">'+esc(r.year||'')+'</span> '+esc(r.make)+' '+esc(r.model)+'</div>'
++ (r.trim?'<div class="trimline">'+esc(r.trim)+'</div>':'')
++ '</div>'
++ '<div><span class="price mono">'+money(r.price)+'</span>'
++ (r.mileage!=null?'<span class="miles mono">'+miles(r.mileage)+'</span>':'')
++ '</div>'
++ mid
++ '<div class="foot">'+(r.listing_url?'<a href="'+esc(r.listing_url)+'" target="_blank" rel="noopener">View listing</a>':'')+'</div>'
++ '</article>';
+}
+
+function rangeRule(lo,hi,price,med){
+if(lo==null||hi==null||!(hi>lo)) return '';
+var clamp = function(x){ return Math.max(0,Math.min(100,x)); };
+var pct = function(v){ return clamp((v-lo)/(hi-lo)*100); };
+return '<div class="rule" aria-hidden="true">'
++ '<div class="track"></div>'
++ '<div class="med" style="left:'+pct(med)+'%"></div>'
++ '<div class="mark" style="left:calc('+pct(price)+'% - 3px)"></div>'
++ '<span class="lo mono">'+money(lo)+'</span><span class="hi mono">'+money(hi)+'</span>'
++ '</div>';
+}
+
+function filtered(){
+var q = state.q.toLowerCase();
+var list = rows.filter(function(r){
+if(state.tier!=='ALL' && tierOf(r)!==state.tier) return false;
+if(state.make!=='ALL' && r.make!==state.make) return false;
+if(q){
+var hay = [(r.year||''),r.make,r.model,(r.trim||'')].join(' ').toLowerCase();
+if(hay.indexOf(q)===-1) return false;
+}
+return true;
+});
+if(state.sort==='new') list.sort(function(a,b){ return new Date(b.first_seen_at)-new Date(a.first_seen_at); });
+if(state.sort==='delta') list.sort(function(a,b){ return (deltaOf(b)||-1e12)-(deltaOf(a)||-1e12); });
+if(state.sort==='price_asc') list.sort(function(a,b){ return (a.price||9e12)-(b.price||9e12); });
+if(state.sort==='price_desc') list.sort(function(a,b){ return (b.price||-1)-(a.price||-1); });
+return list;
+}
+
+function render(){
+renderTally(); renderMakes();
+var list = filtered();
+document.getElementById('grid').innerHTML = list.map(card).join('');
+document.getElementById('empty').hidden = list.length>0;
+document.getElementById('bigcount').textContent = list.length;
+var under = list.filter(function(r){ var d=deltaOf(r); return d!==null && d>0; }).length;
+document.getElementById('subline').textContent =
+under+' priced under sold market // '+new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'});
+}
+
+document.getElementById('q').addEventListener('input', function(e){ state.q=e.target.value; render(); });
+document.getElementById('sort').addEventListener('change', function(e){ state.sort=e.target.value; render(); });
+
+fetch('https://qymkzfhdneukffeilrhx.supabase.co/functions/v1/board?k='+encodeURIComponent(K))
+.then(function(r){ if(!r.ok) throw new Error('data '+r.status); return r.json(); })
+.then(function(j){
+rows = j.rows||[];
+document.getElementById('stamp').textContent =
+'Live // '+new Date(j.generated_at).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+render();
+})
+.catch(function(e){
+document.getElementById('stamp').textContent = 'Data failed to load // refresh';
+});
+})();
+</script>
+</body>
+</html>
