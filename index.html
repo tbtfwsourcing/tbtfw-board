@@ -12,12 +12,13 @@
   /* TBTFW BOARD DESIGN CONTRACT v1.1: pure black, white type, hairline rules,
      uppercase letterspaced eyebrows, // motif, monochrome verdicts,
      photography leads. Do not reskin without re-reading the contract.
-     BOARD UI v1.4 (R13 item 6): free-text search over title + spec line,
-     discovered-window pills 24H/7D/ALL. Both compose with the v1.3 section
-     tabs (ALL/HOT/NEEDS YOUR CALL/SOLD) and the make-filter pills; tab
-     counts recompose under all filters. URL-hash view state (#hot/porsche)
-     unchanged from v1.3 — search and window are ephemeral, not in the hash.
-     ?k= untouched. No client storage. */
+     BOARD UI v1.5 (G's ruling, Jul 8): make-filter pills derive from the
+     LIVE HUNT ONLY (active rows + review lane) — never from sold_rows.
+     Sold cars of other makes still render inside the SOLD tab, but makes
+     outside the hunt never appear as pills. Otherwise identical to v1.4:
+     free-text search over title + spec line, discovered-window pills
+     24H/7D/ALL, full composition with section tabs, hash state
+     (#hot/porsche) unchanged, ?k= untouched, no client storage. */
   :root {
     --bg: #000000;
     --panel: #0a0a0a;
@@ -326,6 +327,7 @@
     if (DATA) {
       make = findMakeBySlug(ms);
       pendingMakeSlug = "";
+      if (!make) writeHash(); /* unknown slug -> normalize */
     } else {
       make = null; pendingMakeSlug = ms; /* resolve once payload arrives */
     }
@@ -505,18 +507,19 @@
      and to tab counts, so the numbers always answer the filtered question. */
   function matchesFilters(r) { return byMake(r) && byWindow(r) && bySearch(r); }
 
-  /* ---------- R13: payload-derived make list + hash slug resolution ---------- */
-  function allRowsArrays() {
+  /* ---------- R13: payload-derived make list + hash slug resolution.
+     STANDING RULE (G, Jul 8): the make pill row derives from the LIVE HUNT
+     ONLY — active rows + review lane. sold_rows never contribute makes. */
+  function huntRows() {
     if (!DATA) return [];
     var out = [];
     if (Array.isArray(DATA.rows)) out = out.concat(DATA.rows);
     if (Array.isArray(DATA.review_rows)) out = out.concat(DATA.review_rows);
-    if (Array.isArray(DATA.sold_rows)) out = out.concat(DATA.sold_rows);
     return out;
   }
   function makeList() {
     var seen = {}, out = [];
-    allRowsArrays().forEach(function (r) {
+    huntRows().forEach(function (r) {
       if (r && r.make && !seen[r.make]) { seen[r.make] = true; out.push(r.make); }
     });
     out.sort(function (a, b) { return a.localeCompare(b); });
